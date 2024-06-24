@@ -60,6 +60,6 @@ class Example extends Component {
 | t `Integer`                   | The playback instant in seconds to start the video at | null |
 
 
-## License
+## Maintainer
 
-MIT © [gumlet](https://github.com/gumlet)
+This library is maintained by [gumlet](https://github.com/gumlet)

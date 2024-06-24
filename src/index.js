@@ -7,7 +7,7 @@ export const GumletEmbedPlayer = ({
   schemaOrgVideoObject={},
   ...props
 }) => {
-  if(!videoID) return <div className={styles.error}>Error: videoID is required</div>
+  if(!videoID) return <div>Error: videoID is required</div>
 
   let srcURL = new URL(`https://play.gumlet.io/embed/${videoID}`);
   

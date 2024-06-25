@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const GumletEmbedPlayer = ({ 
+export const GumletPlayer = ({ 
   videoID,
   title="Gumlet video player",
   style={padding:"56.25% 0 0 0", position:"relative"},

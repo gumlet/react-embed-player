@@ -161,6 +161,9 @@ export const GumletPlayer = forwardRef(({
     player.on('error', (e) => {
       if(props.onError) props.onError(e);
     });
+    player.on('playbackRateChange', (e) => {
+      if(props.onError) props.onPlaybackRateChange(e);
+    });
   }, [iframeRef]);
 
   return (

@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import {useRef, useEffect} from 'react';
+import playerjs from '@gumlet/player.js';
 
 export const GumletPlayer = ({ 
   videoID,
@@ -7,6 +9,9 @@ export const GumletPlayer = ({
   schemaOrgVideoObject={},
   ...props
 }) => {
+  // create a refereence
+  const iframeRef = useRef(null);
+
   if(!videoID) return <div>Error: videoID is required</div>
 
   let srcURL = new URL(`https://play.gumlet.io/embed/${videoID}`);
@@ -15,6 +20,52 @@ export const GumletPlayer = ({
     srcURL.searchParams.append(key, value);
   }
 
+  useEffect(() => {
+    if(!iframeRef.current) return;
+    const player = new playerjs.Player(iframeRef.current);
+    
+    player.on('ready', () => {
+      if(props.onReady) props.onReady();
+    });
+    player.on('pause', () => {
+      if(props.onPause) props.onPause();
+    });
+    player.on('play', () => {
+      if(props.onPlay) props.onPlay();
+    });
+    player.on('progress', (e) => {
+      if(props.onProgress) props.onProgress(e);
+    });
+    player.on('timeupdate', (e) => {
+      if(props.onTimeUpdate) props.onTimeUpdate(e);
+    });
+    player.on('ended', () => {
+      if(props.onEnded) props.onEnded();
+    });
+    player.on('fullscreenChange', (e) => {
+      if(props.onFullScreenChange) props.onFullScreenChange(e);
+    });
+    player.on('pipChange', (e) => {
+      if(props.onPipChange) props.onPipChange(e);
+    });
+    player.on('audioChange', (e) => {
+      if(props.onAudioChange) props.onAudioChange(e);
+    });
+    player.on('qualityChange', (e) => {
+      if(props.onQualityChange) props.onQualityChange(e);
+    });
+    player.on('volumeChange', (e) => {
+      if(props.onVolumeChange) props.onVolumeChange(e);
+    });
+    player.on('seeked', (e) => {
+      if(props.onSeeked) props.onSeeked(e);
+    });
+    player.on('error', (e) => {
+      if(props.onError) props.onError(e);
+    });
+  }, [iframeRef]);
+  
+  
   return (
     <div style={style}>
       {
@@ -22,6 +73,7 @@ export const GumletPlayer = ({
       }
       
       <iframe 
+        ref={iframeRef}
         loading="lazy" 
         title={title}
         src={srcURL.toString()}

@@ -1,18 +1,113 @@
 import React from 'react';
-import {useRef, useEffect} from 'react';
+import {useRef, useEffect, useState, forwardRef, useImperativeHandle} from 'react';
 import playerjs from '@gumlet/player.js';
 
-export const GumletPlayer = ({ 
-  videoID,
-  title="Gumlet video player",
-  style={padding:"56.25% 0 0 0", position:"relative"},
-  schemaOrgVideoObject={},
-  ...props
-}) => {
-  // create a refereence
+export const GumletPlayer = forwardRef(({ 
+    videoID,
+    title="Gumlet video player",
+    style={padding:"56.25% 0 0 0", position:"relative"},
+    schemaOrgVideoObject={},
+    ...props
+  }, ref) => {
+  useImperativeHandle(ref, () => ({
+    play,
+    pause,
+    mute,
+    unmute,
+    setVolume,
+    setCurrentTime,
+    setPlaybackRate,
+    getPaused,
+    getMuted,
+    getVolume,
+    getDuration,
+    getCurrentTime,
+    getPlaybackRate
+  }));
+
   const iframeRef = useRef(null);
+  const [playerJSObject, setPlayerJSObject] = useState(null);
 
   if(!videoID) return <div>Error: videoID is required</div>
+
+  const play = () => {
+    console.log();
+    if(playerJSObject) playerJSObject.play();
+  }
+
+  const pause = () => {
+    if(playerJSObject) playerJSObject.pause();
+  }
+
+  const mute = () => {
+    if(playerJSObject) playerJSObject.mute();
+  }
+
+  const unmute = () => {
+    if(playerJSObject) playerJSObject.unmute();
+  }
+
+  const setVolume = (volume) => {
+    if(playerJSObject) playerJSObject.setVolume(volume);
+  }
+
+  const setCurrentTime = (time) => {
+    if(playerJSObject) playerJSObject.setCurrentTime(time);
+  }
+
+  const setPlaybackRate = (rate) => {
+    if(playerJSObject) playerJSObject.setPlaybackRate(rate);
+  }
+
+  const getPaused = () => {
+    return new Promise((resolve, reject) => {
+      if(playerJSObject) playerJSObject.getPaused((e)=>{
+        resolve(e);
+      });
+    });
+  };
+
+  const getMuted = () => {
+    return new Promise((resolve, reject) => {
+      if(playerJSObject) playerJSObject.getMuted((e)=>{
+        resolve(e);
+      });
+    });
+  };
+
+  const getVolume = () => {
+    return new Promise((resolve, reject) => {
+      if(playerJSObject) playerJSObject.getVolume((e)=>{
+        resolve(e);
+      });
+    });
+  };
+
+  const getDuration = () => {
+    return new Promise((resolve, reject) => {
+      if(playerJSObject) playerJSObject.getDuration((e)=>{
+        resolve(e);
+      });
+    });
+  };
+
+  const getCurrentTime = () => {
+    return new Promise((resolve, reject) => {
+      if(playerJSObject) playerJSObject.getCurrentTime((e)=>{
+        resolve(e);
+      });
+    });
+  };
+
+  const getPlaybackRate = () => {
+    return new Promise((resolve, reject) => {
+      if(playerJSObject) playerJSObject.getPlaybackRate((e)=>{
+        resolve(e);
+      });
+    });
+  };
+  
+
 
   let srcURL = new URL(`https://play.gumlet.io/embed/${videoID}`);
   
@@ -20,9 +115,12 @@ export const GumletPlayer = ({
     srcURL.searchParams.append(key, value);
   }
 
+
   useEffect(() => {
     if(!iframeRef.current) return;
+    
     const player = new playerjs.Player(iframeRef.current);
+    setPlayerJSObject(player);
     
     player.on('ready', () => {
       if(props.onReady) props.onReady();
@@ -64,8 +162,7 @@ export const GumletPlayer = ({
       if(props.onError) props.onError(e);
     });
   }, [iframeRef]);
-  
-  
+
   return (
     <div style={style}>
       {
@@ -83,4 +180,4 @@ export const GumletPlayer = ({
       </iframe>
     </div>
   )
-}
+});

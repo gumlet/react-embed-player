@@ -31,7 +31,6 @@ export const GumletPlayer = forwardRef(({
   if(!videoID) return <div>Error: videoID is required</div>
 
   const play = () => {
-    console.log();
     if(playerJSObject) playerJSObject.play();
   }
 

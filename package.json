@@ -4,7 +4,10 @@
   "description": "Gumlet Embed player for react",
   "author": "Gumlet Pte. Ltd.",
   "license": "MIT",
-  "repository": "gumlet/react-embed-player",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gumlet/react-embed-player.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",

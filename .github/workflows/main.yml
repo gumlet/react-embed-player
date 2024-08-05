@@ -20,7 +20,7 @@ jobs:
     - name: Install microbundle as a dev dependency
       run: npm install -D microbundle
     - name: Build
-      run: npm run build
+      run: npx microbundle
     - name: Publish
       run:
         npm publish

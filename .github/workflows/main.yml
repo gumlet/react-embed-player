@@ -18,7 +18,7 @@ jobs:
     - name: Publish
       run: |
         npm ci
-        npm i microbundle
+        npm ci microbundle
         npm publish
       env:
         NODE_ENV: "production"

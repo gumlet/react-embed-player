@@ -12,7 +12,6 @@
     "node": ">=16"
   },
   "scripts": {
-    "prepublish": "rm -rf ./dist && npm run build",
     "build": "microbundle",
     "start": "microbundle watch"
   },

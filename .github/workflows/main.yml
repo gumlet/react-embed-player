@@ -26,4 +26,4 @@ jobs:
         npm publish
     env:
       NODE_ENV: "production"
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

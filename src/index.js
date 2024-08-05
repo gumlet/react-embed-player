@@ -106,9 +106,12 @@ export const GumletPlayer = forwardRef(({
     });
   };
   
+  let version = "";
+  if(props.version) {
+    version = `-${props.version}`;
+  }
 
-
-  let srcURL = new URL(`https://play.gumlet.io/embed/${videoID}`);
+  let srcURL = new URL(`https://play${version}.gumlet.io/embed/${videoID}`);
   
   for (const [key, value] of Object.entries(props)) {
     srcURL.searchParams.append(key, value);

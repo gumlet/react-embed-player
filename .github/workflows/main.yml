@@ -18,7 +18,8 @@ jobs:
     - name: Publish
       run: |
         npm ci
+        npm i microbundle
         npm publish
       env:
-        NODE_ENV: "development"
+        NODE_ENV: "production"
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

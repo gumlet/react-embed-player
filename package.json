@@ -1,6 +1,6 @@
 {
   "name": "@gumlet/react-embed-player",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gumlet Embed player for react",
   "author": "Gumlet Pte. Ltd.",
   "license": "MIT",
@@ -31,6 +31,6 @@
     "dist"
   ],
   "dependencies": {
-    "@gumlet/player.js": "^2.0.0"
+    "@gumlet/player.js": "^2.0.3"
   }
 }

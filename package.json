@@ -1,7 +1,8 @@
 {
   "name": "@gumlet/react-embed-player",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Gumlet Embed player for react",
+  "type": "module",
   "author": "Gumlet Pte. Ltd.",
   "license": "MIT",
   "repository": {
@@ -15,16 +16,14 @@
     "node": ">=16"
   },
   "scripts": {
-    "build": "microbundle",
-    "start": "microbundle watch",
-    "prepublishOnly": "microbundle"
+    "prepublishOnly": "node esbuild.js"
   },
   "peerDependencies": {
     "react": ">=15.0.1",
     "react-dom": ">=15.0.1"
   },
   "devDependencies": {
-    "microbundle": "^0.15.1",
+    "esbuild": "^0.21.5",
     "react": ">=15.0.1",
     "react-dom": ">=15.0.1"
   },

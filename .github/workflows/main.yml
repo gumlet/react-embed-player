@@ -27,5 +27,4 @@ jobs:
       run:
         npm publish
     env:
-      NODE_ENV: "production"
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

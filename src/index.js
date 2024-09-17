@@ -1,6 +1,6 @@
 import React from 'react';
 import {useRef, useEffect, useState, forwardRef, useImperativeHandle} from 'react';
-import playerjs from '@gumlet/player.js';
+import {playerjs} from '@gumlet/player.js';
 
 export const GumletPlayer = forwardRef(({ 
     videoID,

@@ -16,7 +16,8 @@
   },
   "scripts": {
     "build": "microbundle",
-    "start": "microbundle watch"
+    "start": "microbundle watch",
+    "prepublishOnly": "microbundle"
   },
   "peerDependencies": {
     "react": ">=15.0.1",

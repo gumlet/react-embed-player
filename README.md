@@ -15,7 +15,7 @@ npm install --save @gumlet/react-embed-player
 ```jsx
 import React, { Component } from 'react'
 
-import GumletPlayer from '@gumlet/react-embed-player'
+import {GumletPlayer} from '@gumlet/react-embed-player'
 
 class Example extends Component {
   render() {

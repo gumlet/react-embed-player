@@ -23,7 +23,7 @@
     "react-dom": ">=15.0.1"
   },
   "devDependencies": {
-    "esbuild": "^0.21.5",
+    "esbuild": "^0.25.0",
     "react": ">=15.0.1",
     "react-dom": ">=15.0.1"
   },

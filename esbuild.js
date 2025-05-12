@@ -3,7 +3,7 @@ import * as esbuild from 'esbuild'
 
 const sharedConfig = {
   entryPoints: ['src/index.js'],
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', 'react/jsx-runtime'],
   bundle: true,
   sourcemap: true,
   target: ['esnext'],
@@ -12,17 +12,14 @@ const sharedConfig = {
 }
 
 await Promise.all([
-  // CommonJS build
   esbuild.build({
     ...sharedConfig,
-    outfile: 'dist/index.cjs', // CJS build
+    outfile: 'dist/index.cjs',
     format: 'cjs',
   }),
-
-  // ESM build
   esbuild.build({
     ...sharedConfig,
-    outfile: 'dist/index.mjs', // ESM build
+    outfile: 'dist/index.mjs',
     format: 'esm',
   }),
 ])

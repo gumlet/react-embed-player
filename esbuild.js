@@ -1,13 +1,28 @@
+// esbuild.js
 import * as esbuild from 'esbuild'
 
-await esbuild.build({
+const sharedConfig = {
   entryPoints: ['src/index.js'],
-  bundle: true,
-  outfile: 'dist/index.js',
-  format: 'esm',
   external: ['react', 'react-dom'],
+  bundle: true,
   sourcemap: true,
   target: ['esnext'],
-  jsx: 'automatic', // Enable JSX for React 17+
-  loader: { '.js': 'jsx' }
-})
+  jsx: 'automatic',
+  loader: { '.js': 'jsx' },
+}
+
+await Promise.all([
+  // CommonJS build
+  esbuild.build({
+    ...sharedConfig,
+    outfile: 'dist/index.cjs', // CJS build
+    format: 'cjs',
+  }),
+
+  // ESM build
+  esbuild.build({
+    ...sharedConfig,
+    outfile: 'dist/index.mjs', // ESM build
+    format: 'esm',
+  }),
+])

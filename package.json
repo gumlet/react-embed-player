@@ -1,6 +1,6 @@
 {
   "name": "@gumlet/react-embed-player",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Gumlet Embed player for react",
   "author": "Gumlet Pte. Ltd.",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "react-dom": ">=15.0.1"
   },
   "dependencies": {
-    "@gumlet/player.js": "^2.0.6"
+    "@gumlet/player.js": "^2.0.10"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",

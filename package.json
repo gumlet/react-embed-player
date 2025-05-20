@@ -1,38 +1,31 @@
 {
   "name": "@gumlet/react-embed-player",
-  "version": "2.0.4",
-  "description": "Gumlet Embed player for react",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "version": "2.0.5",
+  "description": "Gumlet React Embed Player",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepublishOnly": "tsup"
+    "build": "tsup"
   },
   "peerDependencies": {
-    "react": ">=15.0.1",
-    "react-dom": ">=15.0.1"
-  },
-  "dependencies": {
-    "@gumlet/player.js": "^2.0.13"
+    "react": ">=17",
+    "react-dom": ">=17"
   },
   "devDependencies": {
-    "typescript": "^5.8.3",
     "tsup": "^8.5.0",
-    "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.5",
-    "esbuild": "^0.25.0",
-    "react": ">=15.0.1",
-    "react-dom": ">=15.0.1"
+    "typescript": "^5.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
   }
 }

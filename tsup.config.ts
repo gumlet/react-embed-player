@@ -2,10 +2,11 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src/index.tsx'],
-  format: ['esm', 'cjs'],
-  dts: true,
+  format: ['cjs', 'esm'],
+  outExtension({ format }) {
+    return { js: format === 'cjs' ? '.cjs' : '.mjs' };
+  },
   sourcemap: true,
-  clean: true,
-  target: 'es2017',
-  external: ['react', 'react-dom'],
+  dts: true,
+  clean: true
 });

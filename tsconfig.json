@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "module": "ESNext",
-    "lib": ["DOM", "ESNext"],
-    "jsx": "react-jsx",
     "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "outDir": "dist",
-    "moduleResolution": "Node",
+    "emitDeclarationOnly": false,
+    "declarationDir": "dist",
+    "module": "ESNext",
+    "target": "ES2017",
+    "jsx": "react",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": true
+    "allowJs": false,
+    "strict": true,
+    "outDir": "dist"
   },
-  "include": ["src", "declarations.d.ts"]
+  "include": ["src", "types"]
 }

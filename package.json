@@ -1,25 +1,15 @@
 {
   "name": "@gumlet/react-embed-player",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Gumlet Embed player for react",
-  "author": "Gumlet Pte. Ltd.",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gumlet/react-embed-player.git"
-  },
-  "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  
-  "engines": {
-    "node": ">=16"
-  },
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [
@@ -37,12 +27,12 @@
     "@gumlet/player.js": "^2.0.13"
   },
   "devDependencies": {
+    "typescript": "^5.8.3",
+    "tsup": "^8.5.0",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "esbuild": "^0.25.0",
     "react": ">=15.0.1",
-    "react-dom": ">=15.0.1",
-    "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "react-dom": ">=15.0.1"
   }
 }

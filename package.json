@@ -19,6 +19,9 @@
     "build": "tsup",
     "prepublishOnly": "npm run build"
   },
+  "dependencies": {
+    "@gumlet/player.js": "^2.0.13"
+  },
   "peerDependencies": {
     "react": ">=17",
     "react-dom": ">=17"

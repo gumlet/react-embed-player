@@ -1,6 +1,6 @@
 {
   "name": "@gumlet/react-embed-player",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Gumlet React Embed Player",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",

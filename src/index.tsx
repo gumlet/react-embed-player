@@ -90,8 +90,8 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
 
     useEffect(() => {
       if (!iframeRef.current) return;
-      console.log(playerjs);
-      const player = new playerjs.Player(iframeRef.current);
+      console.log(playerjs.default);
+      const player = new playerjs.default.Player(iframeRef.current);
       window.playerJsObj = player; // For debugging purposes
       setPlayerJSObject(player);
 

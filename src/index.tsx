@@ -7,7 +7,7 @@ import React, {
   useImperativeHandle,
   CSSProperties
 } from 'react';
-import Player from '@gumlet/player.js/dist/player.min.js';
+import playerjs from '@gumlet/player.js/dist/player.min.js';
 
 // Type definitions for the component props
 interface GumletPlayerProps {
@@ -90,7 +90,8 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
 
     useEffect(() => {
       if (!iframeRef.current) return;
-      const player = new Player(iframeRef.current);
+      console.log(playerjs);
+      const player = new playerjs.Player(iframeRef.current);
       window.playerJsObj = player; // For debugging purposes
       setPlayerJSObject(player);
 

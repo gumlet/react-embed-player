@@ -1,6 +1,6 @@
 {
   "name": "@gumlet/react-embed-player",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "Gumlet React Embed Player",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -23,8 +23,8 @@
     "@gumlet/player.js": "^2.0.16"
   },
   "peerDependencies": {
-    "react": ">=17",
-    "react-dom": ">=17"
+    "react": ">=15",
+    "react-dom": ">=15"
   },
   "devDependencies": {
     "tsup": "^8.5.0",

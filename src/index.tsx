@@ -36,11 +36,11 @@ interface GumletPlayerProps {
   [key: string]: any; // Allow additional props for iframe src query params
 }
 
-declare global {
-  interface Window {
-    playerJsObj: any;
-  }
-}
+// declare global {
+//   interface Window {
+//     playerJsObj: any;
+//   }
+// }
 
 export interface GumletPlayerHandle {
   play: () => void;
@@ -90,24 +90,35 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
 
     useEffect(() => {
       if (!iframeRef.current) return;
-      const player = new playerjs.Player(iframeRef.current);
-      window.playerJsObj = player; // For debugging purposes
-      setPlayerJSObject(player);
+      const PlayerClass = playerjs?.default?.Player || playerjs?.Player;
 
-      player.on('ready', () => props.onReady?.());
-      player.on('pause', () => props.onPause?.());
-      player.on('play', () => props.onPlay?.());
-      player.on('progress', (e: any) => props.onProgress?.(e));
-      player.on('timeupdate', (e: any) => props.onTimeUpdate?.(e));
-      player.on('ended', () => props.onEnded?.());
-      player.on('fullscreenChange', (e: any) => props.onFullScreenChange?.(e));
-      player.on('pipChange', (e: any) => props.onPipChange?.(e));
-      player.on('audioChange', (e: any) => props.onAudioChange?.(e));
-      player.on('qualityChange', (e: any) => props.onQualityChange?.(e));
-      player.on('volumeChange', (e: any) => props.onVolumeChange?.(e));
-      player.on('seeked', (e: any) => props.onSeeked?.(e));
-      player.on('error', (e: any) => props.onError?.(e));
-      player.on('playbackRateChange', (e: any) => props.onPlaybackRateChange?.(e));
+      if (!PlayerClass) {
+        console.error("PlayerJS Player class not found in import.");
+        return;
+      }
+
+      const player = new PlayerClass(iframeRef.current);
+      
+      // window.playerJsObj = player; // For debugging purposes
+      setPlayerJSObject(player);
+      player.on('ready', () => {
+        props.onReady?.();
+
+        // Register events inside 'ready'
+        player.on('pause', () => props.onPause?.());
+        player.on('play', () => props.onPlay?.());
+        player.on('progress', (e: any) => props.onProgress?.(e));
+        player.on('timeupdate', (e: any) => props.onTimeUpdate?.(e));
+        player.on('ended', () => props.onEnded?.());
+        player.on('fullscreenChange', (e: any) => props.onFullScreenChange?.(e));
+        player.on('pipChange', (e: any) => props.onPipChange?.(e));
+        player.on('audioChange', (e: any) => props.onAudioChange?.(e));
+        player.on('qualityChange', (e: any) => props.onQualityChange?.(e));
+        player.on('volumeChange', (e: any) => props.onVolumeChange?.(e));
+        player.on('seeked', (e: any) => props.onSeeked?.(e));
+        player.on('error', (e: any) => props.onError?.(e));
+        player.on('playbackRateChange', (e: any) => props.onPlaybackRateChange?.(e));
+      });
     }, [iframeRef]);
 
     if (!videoID) return <div>Error: videoID is required</div>;

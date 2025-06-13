@@ -14,6 +14,7 @@ interface GumletPlayerProps {
   videoID: string;
   title?: string;
   style?: CSSProperties;
+  iframeStyle?: CSSProperties;
   schemaOrgVideoObject?: Record<string, any>;
   version?: string;
 
@@ -65,6 +66,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
       title = 'Gumlet video player',
       style = { padding: '56.25% 0 0 0', position: 'relative' },
       schemaOrgVideoObject = {},
+      iframeStyle = { border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' },
       ...props
     },
     ref
@@ -149,8 +151,9 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
     const getPlaybackRate = (): Promise<number> =>
       new Promise((resolve) => playerJSObject?.getPlaybackRate(resolve));
 
-    const version = props.version ? `-${props.version}` : '';
-    const srcURL = new URL(`https://play${version}.gumlet.io/embed/${videoID}`);
+    const defaultVersion = 'play';
+    const domain = props.version ? `${props.version}` : `${defaultVersion}`;
+    const srcURL = new URL(`https://${domain}.gumlet.io/embed/${videoID}`);
 
     for (const [key, value] of Object.entries(props)) {
       if (value != null) {
@@ -171,14 +174,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
           loading="lazy"
           title={title}
           src={srcURL.toString()}
-          style={{
-            border: 'none',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            height: '100%',
-            width: '100%',
-          }}
+          style={iframeStyle}
           allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
           allowFullScreen
         />

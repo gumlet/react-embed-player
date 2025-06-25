@@ -36,6 +36,7 @@ class Example extends Component {
 | Prop          | Description   | Default       |
 | ------------- | ------------- | ------------- |
 | videoID `String` `Required`   | Video ID which is generated after processing the video on gumlet  | |
+| isLive `Boolean`              | Whether the video is a live stream or not  | false |
 | title `String`                | Title of the iframe  | Gumlet video player |
 | style `Object`                | Style tag passed on to the iframe container | {padding:"56.25% 0 0 0", position:"relative"} |
 | schemaOrgVideoObject `Object` | schema.org object which is added to a script tag | {} |

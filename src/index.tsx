@@ -12,6 +12,7 @@ import playerjs from '@gumlet/player.js/dist/player.min.js';
 // Type definitions for the component props
 interface GumletPlayerProps {
   videoID: string;
+  isLive?: boolean;
   title?: string;
   style?: CSSProperties;
   iframeStyle?: CSSProperties;
@@ -67,6 +68,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
       style = { padding: '56.25% 0 0 0', position: 'relative' },
       schemaOrgVideoObject = {},
       iframeStyle = { border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' },
+      isLive = false,
       ...props
     },
     ref
@@ -153,7 +155,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
 
     const defaultVersion = 'play';
     const domain = props.version ? `${props.version}` : `${defaultVersion}`;
-    const srcURL = new URL(`https://${domain}.gumlet.io/embed/${videoID}`);
+    const srcURL = new URL(`https://${domain}.gumlet.io/embed${isLive ? '/live' : ''}/${videoID}`);
 
     for (const [key, value] of Object.entries(props)) {
       if (value != null) {

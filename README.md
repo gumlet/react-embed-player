@@ -59,6 +59,7 @@ class Example extends Component {
 | facebook_pixel_id `String`    | Facebook pixel ID to be used to send data about playback | null |
 | ga_tracking_id `String`       | Google pixel ID to be used to send data about playback | null |
 | t `Integer`                   | The playback instant in seconds to start the video at | null |
+| enabled_player_control `Array`| Only allow thes eplayer controls to be visible  | null  |
 
 
 Methods

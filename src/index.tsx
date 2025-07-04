@@ -18,6 +18,7 @@ interface GumletPlayerProps {
   iframeStyle?: CSSProperties;
   schemaOrgVideoObject?: Record<string, any>;
   version?: string;
+  enabled_player_control?: [];
 
   // Optional player event handlers
   onReady?: () => void;
@@ -69,6 +70,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
       schemaOrgVideoObject = {},
       iframeStyle = { border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' },
       isLive = false,
+      enabled_player_control = [],
       ...props
     },
     ref
@@ -159,7 +161,12 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
 
     for (const [key, value] of Object.entries(props)) {
       if (value != null) {
-        srcURL.searchParams.append(key, value);
+        // check if value is an array then append the same key multiple times
+        if (Array.isArray(value)) {
+          value.forEach((item) => srcURL.searchParams.append(key, item));
+        } else {
+          srcURL.searchParams.append(key, value);
+        }
       }
     }
 

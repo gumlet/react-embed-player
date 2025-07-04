@@ -70,13 +70,36 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
       schemaOrgVideoObject = {},
       iframeStyle = { border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' },
       isLive = false,
-      enabled_player_control = [],
       ...props
     },
     ref
   ) => {
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const [playerJSObject, setPlayerJSObject] = useState<any>(null);
+
+    const blacklistedProps = [
+      'videoID',
+      'isLive',
+      'title',
+      'style',
+      'schemaOrgVideoObject',
+      'iframeStyle',
+      // all callback functions
+      'onReady',
+      'onPlay',
+      'onPause',
+      'onProgress',
+      'onTimeUpdate',
+      'onEnded',
+      'onFullScreenChange',
+      'onPipChange',
+      'onAudioChange',
+      'onQualityChange',
+      'onVolumeChange',
+      'onSeeked',
+      'onError',
+      'onPlaybackRateChange',
+    ]
 
     useImperativeHandle(ref, () => ({
       play,
@@ -160,7 +183,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
     const srcURL = new URL(`https://${domain}.gumlet.io/embed${isLive ? '/live' : ''}/${videoID}`);
 
     for (const [key, value] of Object.entries(props)) {
-      if (value != null) {
+      if (value != null && !blacklistedProps.includes(key)) {
         // check if value is an array then append the same key multiple times
         if (Array.isArray(value)) {
           value.forEach((item) => srcURL.searchParams.append(key, item));

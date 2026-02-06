@@ -12,6 +12,10 @@
       "require": "./dist/index.cjs"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gumlet/react-embed-player.git"
+  },
   "files": [
     "dist"
   ],

@@ -16,6 +16,7 @@
     "dist"
   ],
   "scripts": {
+    "lint": "biome lint ./src",
     "build": "tsup",
     "prepublishOnly": "npm run build"
   },
@@ -27,9 +28,10 @@
     "react-dom": ">=15"
   },
   "devDependencies": {
-    "tsup": "^8.5.0",
-    "typescript": "^5.0.0",
+    "@biomejs/biome": "^2.3.14",
     "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0"
+    "@types/react-dom": "^17.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.0.0"
   }
 }

@@ -1,11 +1,10 @@
-/* eslint-disable */
 import React, {
   useRef,
   useEffect,
   useState,
   forwardRef,
   useImperativeHandle,
-  CSSProperties
+  type CSSProperties
 } from 'react';
 import playerjs from '@gumlet/player.js/dist/player.min.js';
 
@@ -127,7 +126,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
       }
 
       const player = new PlayerClass(iframeRef.current);
-      
+
       // window.playerJsObj = player; // For debugging purposes
       setPlayerJSObject(player);
       player.on('ready', () => {
@@ -148,7 +147,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
         player.on('error', (e: any) => props.onError?.(e));
         player.on('playbackRateChange', (e: any) => props.onPlaybackRateChange?.(e));
       });
-    }, [iframeRef]);
+    }, []);
 
     if (!videoID) return <div>Error: videoID is required</div>;
 
@@ -186,7 +185,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
       if (value != null && !blacklistedProps.includes(key)) {
         // check if value is an array then append the same key multiple times
         if (Array.isArray(value)) {
-          value.forEach((item) => srcURL.searchParams.append(key, item));
+          value.forEach((item) => { srcURL.searchParams.append(key, item) });
         } else {
           srcURL.searchParams.append(key, value);
         }
@@ -198,6 +197,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
         {Object.keys(schemaOrgVideoObject).length > 0 && (
           <script
             type="application/ld+json"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for LD+JSON
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgVideoObject) }}
           />
         )}

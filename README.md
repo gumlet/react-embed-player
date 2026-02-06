@@ -48,7 +48,6 @@ class Example extends Component {
 | gm_user_email `String`        | User email passed to gumlet insights object | null |
 | gm_custom_data_1 `String`     | Custom data 1 passed to gumlet insights object | null |
 | loop `Boolean`                | Should the video play in a loop | Default set in collection settings |
-| thumbnail `String`            | URL Encoded value of the Poster/Thumbnail URL which should be shown | Default set in asset details |
 | drm_token `String`            | Token generated on backend for DRM Protected content | null |
 | expires `Integer`             | Token expiry time from epoch in millis for DRM protected content | null |
 | vast_tag_url `String`         | URL Encoded VAST tag URL | null |

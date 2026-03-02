@@ -25,7 +25,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@gumlet/player.js": "^2.0.16"
+    "@gumlet/player.js": "^3.0.3"
   },
   "peerDependencies": {
     "react": ">=15",

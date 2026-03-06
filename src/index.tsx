@@ -1,7 +1,6 @@
 import {
   useRef,
   useEffect,
-  useState,
   forwardRef,
   useImperativeHandle,
   type CSSProperties
@@ -38,11 +37,6 @@ interface GumletPlayerProps {
   [key: string]: any; // Allow additional props for iframe src query params
 }
 
-// declare global {
-//   interface Window {
-//     playerJsObj: any;
-//   }
-// }
 
 export interface GumletPlayerHandle {
   play: () => void;
@@ -74,7 +68,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
     ref
   ) => {
     const iframeRef = useRef<HTMLIFrameElement>(null);
-    const [playerJSObject, setPlayerJSObject] = useState<any>(null);
+    const playerRef = useRef<any>(null);
 
     const propsRef = useRef(props);
     propsRef.current = props;
@@ -103,6 +97,32 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
       'onPlaybackRateChange',
     ]
 
+    const play = () => playerRef.current?.play();
+    const pause = () => playerRef.current?.pause();
+    const mute = () => playerRef.current?.mute();
+    const unmute = () => playerRef.current?.unmute();
+    const setVolume = (volume: number) => playerRef.current?.setVolume(volume);
+    const setCurrentTime = (time: number) => playerRef.current?.setCurrentTime(time);
+    const setPlaybackRate = (rate: number) => playerRef.current?.setPlaybackRate(rate);
+
+    const getPaused = (): Promise<boolean> =>
+      new Promise((resolve) => playerRef.current?.getPaused(resolve));
+
+    const getMuted = (): Promise<boolean> =>
+      new Promise((resolve) => playerRef.current?.getMuted(resolve));
+
+    const getVolume = (): Promise<number> =>
+      new Promise((resolve) => playerRef.current?.getVolume(resolve));
+
+    const getDuration = (): Promise<number> =>
+      new Promise((resolve) => playerRef.current?.getDuration(resolve));
+
+    const getCurrentTime = (): Promise<number> =>
+      new Promise((resolve) => playerRef.current?.getCurrentTime(resolve));
+
+    const getPlaybackRate = (): Promise<number> =>
+      new Promise((resolve) => playerRef.current?.getPlaybackRate(resolve));
+
     useImperativeHandle(ref, () => ({
       play,
       pause,
@@ -121,17 +141,11 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
 
     useEffect(() => {
       if (!iframeRef.current) return;
-      const PlayerClass = playerjs.Player;
 
-      if (!PlayerClass) {
-        console.error("PlayerJS Player class not found in import.");
-        return;
-      }
-
-      const player = new PlayerClass(iframeRef.current);
+      const player = new playerjs.Player(iframeRef.current);
 
       // window.playerJsObj = player; // For debugging purposes
-      setPlayerJSObject(player);
+      playerRef.current = player;
       player.on('ready', () => {
         propsRef.current.onReady?.();
 
@@ -150,35 +164,12 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
         player.on('error', (e: any) => propsRef.current.onError?.(e));
         player.on('playbackRateChange', (e: any) => propsRef.current.onPlaybackRateChange?.(e));
       });
+      return () => {
+        playerRef.current = null;
+      };
     }, []);
 
     if (!videoID) return <div>Error: videoID is required</div>;
-
-    const play = () => playerJSObject?.play();
-    const pause = () => playerJSObject?.pause();
-    const mute = () => playerJSObject?.mute();
-    const unmute = () => playerJSObject?.unmute();
-    const setVolume = (volume: number) => playerJSObject?.setVolume(volume);
-    const setCurrentTime = (time: number) => playerJSObject?.setCurrentTime(time);
-    const setPlaybackRate = (rate: number) => playerJSObject?.setPlaybackRate(rate);
-
-    const getPaused = (): Promise<boolean> =>
-      new Promise((resolve) => playerJSObject?.getPaused(resolve));
-
-    const getMuted = (): Promise<boolean> =>
-      new Promise((resolve) => playerJSObject?.getMuted(resolve));
-
-    const getVolume = (): Promise<number> =>
-      new Promise((resolve) => playerJSObject?.getVolume(resolve));
-
-    const getDuration = (): Promise<number> =>
-      new Promise((resolve) => playerJSObject?.getDuration(resolve));
-
-    const getCurrentTime = (): Promise<number> =>
-      new Promise((resolve) => playerJSObject?.getCurrentTime(resolve));
-
-    const getPlaybackRate = (): Promise<number> =>
-      new Promise((resolve) => playerJSObject?.getPlaybackRate(resolve));
 
     const defaultVersion = 'play';
     const domain = props.version ? `${props.version}` : `${defaultVersion}`;

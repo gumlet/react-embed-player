@@ -28,8 +28,8 @@
     "@gumlet/player.js": "^2.0.16"
   },
   "peerDependencies": {
-    "react": ">=15",
-    "react-dom": ">=15"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",

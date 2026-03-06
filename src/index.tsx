@@ -1,4 +1,4 @@
-import React, {
+import {
   useRef,
   useEffect,
   useState,
@@ -76,6 +76,9 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const [playerJSObject, setPlayerJSObject] = useState<any>(null);
 
+    const propsRef = useRef(props);
+    propsRef.current = props;
+
     const blacklistedProps = [
       'videoID',
       'isLive',
@@ -130,22 +133,22 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
       // window.playerJsObj = player; // For debugging purposes
       setPlayerJSObject(player);
       player.on('ready', () => {
-        props.onReady?.();
+        propsRef.current.onReady?.();
 
         // Register events inside 'ready'
-        player.on('pause', () => props.onPause?.());
-        player.on('play', () => props.onPlay?.());
-        player.on('progress', (e: any) => props.onProgress?.(e));
-        player.on('timeupdate', (e: any) => props.onTimeUpdate?.(e));
-        player.on('ended', () => props.onEnded?.());
-        player.on('fullscreenChange', (e: any) => props.onFullScreenChange?.(e));
-        player.on('pipChange', (e: any) => props.onPipChange?.(e));
-        player.on('audioChange', (e: any) => props.onAudioChange?.(e));
-        player.on('qualityChange', (e: any) => props.onQualityChange?.(e));
-        player.on('volumeChange', (e: any) => props.onVolumeChange?.(e));
-        player.on('seeked', (e: any) => props.onSeeked?.(e));
-        player.on('error', (e: any) => props.onError?.(e));
-        player.on('playbackRateChange', (e: any) => props.onPlaybackRateChange?.(e));
+        player.on('pause', () => propsRef.current.onPause?.());
+        player.on('play', () => propsRef.current.onPlay?.());
+        player.on('progress', (e: any) => propsRef.current.onProgress?.(e));
+        player.on('timeupdate', (e: any) => propsRef.current.onTimeUpdate?.(e));
+        player.on('ended', () => propsRef.current.onEnded?.());
+        player.on('fullscreenChange', (e: any) => propsRef.current.onFullScreenChange?.(e));
+        player.on('pipChange', (e: any) => propsRef.current.onPipChange?.(e));
+        player.on('audioChange', (e: any) => propsRef.current.onAudioChange?.(e));
+        player.on('qualityChange', (e: any) => propsRef.current.onQualityChange?.(e));
+        player.on('volumeChange', (e: any) => propsRef.current.onVolumeChange?.(e));
+        player.on('seeked', (e: any) => propsRef.current.onSeeked?.(e));
+        player.on('error', (e: any) => propsRef.current.onError?.(e));
+        player.on('playbackRateChange', (e: any) => propsRef.current.onPlaybackRateChange?.(e));
       });
     }, []);
 

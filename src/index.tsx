@@ -6,7 +6,7 @@ import React, {
   useImperativeHandle,
   type CSSProperties
 } from 'react';
-import playerjs from '@gumlet/player.js/dist/player.min.js';
+import playerjs from '@gumlet/player.js';
 
 // Type definitions for the component props
 interface GumletPlayerProps {
@@ -118,7 +118,7 @@ export const GumletPlayer = forwardRef<GumletPlayerHandle, GumletPlayerProps>(
 
     useEffect(() => {
       if (!iframeRef.current) return;
-      const PlayerClass = playerjs?.default?.Player || playerjs?.Player;
+      const PlayerClass = playerjs.Player;
 
       if (!PlayerClass) {
         console.error("PlayerJS Player class not found in import.");

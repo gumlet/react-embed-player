@@ -1,4 +1,4 @@
-name: Deploy
+name: Publish on NPM
 
 permissions:
   id-token: write # This is required for requesting the JWT

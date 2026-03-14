@@ -1,11 +1,8 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   entry: ['src/index.tsx'],
   format: ['cjs', 'esm'],
-  outExtension({ format }) {
-    return { js: format === 'cjs' ? '.cjs' : '.mjs' };
-  },
   sourcemap: true,
   dts: true,
   clean: true

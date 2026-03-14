@@ -4,7 +4,7 @@
     "emitDeclarationOnly": false,
     "declarationDir": "dist",
     "module": "ESNext",
-    "target": "ES2017",
+    "target": "es2020",
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
     "esModuleInterop": true,

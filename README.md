@@ -3,6 +3,7 @@
 > Gumlet Embed player in react
 
 [![NPM](https://img.shields.io/npm/v/@gumlet/react-embed-player.svg)](https://www.npmjs.com/package/@gumlet/react-embed-player)
+[![NPM Downloads](https://img.shields.io/npm/dm/%40gumlet%2Freact-embed-player)](https://www.npmjs.com/package/@gumlet/react-embed-player)
 
 ## Install
 
